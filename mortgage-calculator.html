@@ -11,9 +11,9 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free loan payment calculator. Calculate monthly payments, total interest, and view amortization schedules for mortgages, auto loans, and personal loans.">
-    <meta name="keywords" content="loan calculator, mortgage calculator, payment calculator, amortization schedule, loan payment">
-    <title>Loan Payment Calculator - Free Monthly Payment & Amortization Calculator</title>
+    <meta name="description" content="Free mortgage calculator. Calculate monthly mortgage payments, total interest, and view amortization schedules for home loans. Compare 15-year and 30-year mortgages.">
+    <meta name="keywords" content="mortgage calculator, home loan calculator, mortgage payment calculator, amortization schedule, mortgage rate calculator, house payment calculator">
+    <title>Mortgage Calculator - Free Monthly Mortgage Payment Calculator</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
@@ -22,7 +22,7 @@
         <div class="container">
             <a href="index.html" class="nav-brand">Calculator Hub</a>
             <div class="nav-links">
-                <a href="loan-calculator.html" class="active">Loan Calculator</a>
+                <a href="mortgage-calculator.html" class="active">Mortgage</a>
                 <a href="auto-loan.html">Auto Loan</a>
             </div>
         </div>
@@ -34,8 +34,8 @@
     </div>
 
     <header>
-        <h1>Loan Payment Calculator</h1>
-        <p class="subtitle">Calculate monthly payments, total interest, and view detailed amortization schedules</p>
+        <h1>Mortgage Calculator</h1>
+        <p class="subtitle">Calculate monthly mortgage payments, total interest, and view detailed amortization schedules</p>
     </header>
 
     <main>
@@ -43,11 +43,11 @@
             <!-- Calculator Section -->
             <section class="calculator-section">
                 <div class="calculator-card">
-                    <h2>Calculate Your Loan Payment</h2>
+                    <h2>Calculate Your Mortgage Payment</h2>
 
                     <form id="loanForm">
                         <div class="form-group">
-                            <label for="loanAmount">Loan Amount ($)</label>
+                            <label for="loanAmount">Home Loan Amount ($)</label>
                             <input type="number" id="loanAmount" name="loanAmount" min="1" step="1" value="250000" required>
                         </div>
 
@@ -78,7 +78,7 @@
 
             <!-- Results Section -->
             <section id="resultsSection" class="results-section" style="display: none;">
-                <h2>Your Loan Summary</h2>
+                <h2>Your Mortgage Summary</h2>
 
                 <div class="results-grid">
                     <div class="result-card">
@@ -138,11 +138,11 @@
 
             <!-- Educational Content -->
             <section class="content-section">
-                <h2>How Loan Payments Are Calculated</h2>
+                <h2>How Mortgage Payments Are Calculated</h2>
 
-                <p>Understanding how your loan payment is calculated can help you make better financial decisions. This calculator uses the standard loan payment formula to determine your monthly payment amount.</p>
+                <p>Understanding how your mortgage payment is calculated can help you make better financial decisions. This calculator uses the standard mortgage payment formula to determine your monthly payment amount.</p>
 
-                <h3>The Loan Payment Formula</h3>
+                <h3>The Mortgage Payment Formula</h3>
                 <p>Monthly payments are calculated using this formula:</p>
                 <div class="formula">
                     M = P[r(1+r)^n] / [(1+r)^n-1]
@@ -213,7 +213,7 @@
     <footer>
         <div class="container">
             <p><strong>Disclaimer:</strong> This calculator is provided for educational and informational purposes only. It does not constitute financial advice. The results are estimates based on the information you provide. Actual loan terms, payments, and costs may vary. Always consult with a qualified financial advisor or lender for specific advice regarding your financial situation.</p>
-            <p>&copy; 2026 Loan Payment Calculator. All rights reserved.</p>
+            <p>&copy; 2026 Calculator Hub. All rights reserved.</p>
         </div>
     </footer>
 
