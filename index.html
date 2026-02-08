@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free loan payment calculator. Calculate monthly payments, total interest, and view amortization schedules for mortgages, auto loans, and personal loans.">
+    <meta name="keywords" content="loan calculator, mortgage calculator, payment calculator, amortization schedule, loan payment">
+    <title>Loan Payment Calculator - Free Monthly Payment & Amortization Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <!-- Ad Zone: Header -->
+    <div class="ad-zone ad-header">
+        <p class="ad-placeholder">Advertisement</p>
+    </div>
+
+    <header>
+        <h1>Loan Payment Calculator</h1>
+        <p class="subtitle">Calculate monthly payments, total interest, and view detailed amortization schedules</p>
+    </header>
+
+    <main>
+        <div class="container">
+            <!-- Calculator Section -->
+            <section class="calculator-section">
+                <div class="calculator-card">
+                    <h2>Calculate Your Loan Payment</h2>
+
+                    <form id="loanForm">
+                        <div class="form-group">
+                            <label for="loanAmount">Loan Amount ($)</label>
+                            <input type="number" id="loanAmount" name="loanAmount" min="1" step="1" value="250000" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="interestRate">Annual Interest Rate (%)</label>
+                            <input type="number" id="interestRate" name="interestRate" min="0" max="100" step="0.01" value="6.5" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="loanTerm">Loan Term (Years)</label>
+                            <input type="number" id="loanTerm" name="loanTerm" min="1" max="50" step="1" value="30" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="startDate">Start Date (Optional)</label>
+                            <input type="month" id="startDate" name="startDate">
+                        </div>
+
+                        <button type="submit" class="btn-calculate">Calculate Payment</button>
+                    </form>
+                </div>
+
+                <!-- Ad Zone: Sidebar -->
+                <div class="ad-zone ad-sidebar">
+                    <p class="ad-placeholder">Advertisement</p>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section id="resultsSection" class="results-section" style="display: none;">
+                <h2>Your Loan Summary</h2>
+
+                <div class="results-grid">
+                    <div class="result-card">
+                        <h3>Monthly Payment</h3>
+                        <p class="result-value" id="monthlyPayment">$0.00</p>
+                    </div>
+
+                    <div class="result-card">
+                        <h3>Total Interest</h3>
+                        <p class="result-value" id="totalInterest">$0.00</p>
+                    </div>
+
+                    <div class="result-card">
+                        <h3>Total Amount Paid</h3>
+                        <p class="result-value" id="totalAmount">$0.00</p>
+                    </div>
+
+                    <div class="result-card">
+                        <h3>Number of Payments</h3>
+                        <p class="result-value" id="numPayments">0</p>
+                    </div>
+                </div>
+
+                <!-- Chart Section -->
+                <div class="chart-container">
+                    <h3>Principal vs Interest Over Time</h3>
+                    <canvas id="paymentChart"></canvas>
+                </div>
+
+                <!-- Amortization Schedule -->
+                <div class="amortization-section">
+                    <h3>Amortization Schedule</h3>
+                    <div class="table-controls">
+                        <label>
+                            <input type="checkbox" id="showAllPayments">
+                            Show all payments (default shows yearly summary)
+                        </label>
+                    </div>
+                    <div class="table-container">
+                        <table id="amortizationTable">
+                            <thead>
+                                <tr>
+                                    <th>Payment #</th>
+                                    <th>Date</th>
+                                    <th>Payment</th>
+                                    <th>Principal</th>
+                                    <th>Interest</th>
+                                    <th>Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody id="amortizationBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Educational Content -->
+            <section class="content-section">
+                <h2>How Loan Payments Are Calculated</h2>
+
+                <p>Understanding how your loan payment is calculated can help you make better financial decisions. This calculator uses the standard loan payment formula to determine your monthly payment amount.</p>
+
+                <h3>The Loan Payment Formula</h3>
+                <p>Monthly payments are calculated using this formula:</p>
+                <div class="formula">
+                    M = P[r(1+r)^n] / [(1+r)^n-1]
+                </div>
+                <p>Where:</p>
+                <ul>
+                    <li><strong>M</strong> = Monthly payment</li>
+                    <li><strong>P</strong> = Principal (loan amount)</li>
+                    <li><strong>r</strong> = Monthly interest rate (annual rate ÷ 12)</li>
+                    <li><strong>n</strong> = Total number of payments (years × 12)</li>
+                </ul>
+
+                <h3>Understanding Amortization</h3>
+                <p>With each payment you make, a portion goes toward interest and a portion goes toward the principal. Early in the loan, most of your payment goes toward interest. As time goes on, more of each payment goes toward reducing the principal balance.</p>
+
+                <h3>Example Calculation</h3>
+                <p>Let's say you borrow $250,000 at 6.5% interest for 30 years:</p>
+                <ul>
+                    <li>Monthly payment: $1,580.17</li>
+                    <li>Total interest over 30 years: $318,861.18</li>
+                    <li>Total amount paid: $568,861.18</li>
+                </ul>
+                <p>This demonstrates why getting a lower interest rate or paying off your loan early can save you thousands of dollars.</p>
+            </section>
+
+            <!-- FAQ Section -->
+            <section class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+
+                <div class="faq-item">
+                    <h3>What is included in my monthly loan payment?</h3>
+                    <p>Your monthly loan payment calculated here includes only principal and interest. For mortgages, your actual payment may also include property taxes, homeowners insurance, and possibly HOA fees or PMI (private mortgage insurance).</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>How can I lower my monthly payment?</h3>
+                    <p>You can lower your monthly payment by: getting a lower interest rate, extending the loan term (though you'll pay more interest overall), making a larger down payment to reduce the loan amount, or improving your credit score before applying.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Should I choose a shorter or longer loan term?</h3>
+                    <p>Shorter loan terms (like 15 years) have higher monthly payments but you'll pay much less interest over the life of the loan. Longer terms (like 30 years) have lower monthly payments but cost more in total interest. Choose based on your budget and financial goals.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>What is an amortization schedule?</h3>
+                    <p>An amortization schedule is a table showing each loan payment over time, breaking down how much goes toward principal versus interest. It also shows your remaining balance after each payment.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Can I pay off my loan early?</h3>
+                    <p>Most loans allow early payoff, but some have prepayment penalties. Check your loan terms. Paying extra toward principal can save you thousands in interest and help you become debt-free faster.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>How accurate is this calculator?</h3>
+                    <p>This calculator provides accurate estimates based on the standard amortization formula used by banks and lenders. However, actual payments may vary slightly based on how your lender calculates interest and whether there are additional fees or insurance costs.</p>
+                </div>
+            </section>
+
+            <!-- Ad Zone: Bottom -->
+            <div class="ad-zone ad-bottom">
+                <p class="ad-placeholder">Advertisement</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p><strong>Disclaimer:</strong> This calculator is provided for educational and informational purposes only. It does not constitute financial advice. The results are estimates based on the information you provide. Actual loan terms, payments, and costs may vary. Always consult with a qualified financial advisor or lender for specific advice regarding your financial situation.</p>
+            <p>&copy; 2026 Loan Payment Calculator. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="calculator.js"></script>
+</body>
+</html>
