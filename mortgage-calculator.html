@@ -47,23 +47,55 @@
 
                     <form id="loanForm">
                         <div class="form-group">
-                            <label for="loanAmount">Home Loan Amount ($)</label>
-                            <input type="number" id="loanAmount" name="loanAmount" min="1" step="1" value="250000" required>
+                            <label for="homePrice">Home Price ($)</label>
+                            <input type="number" id="homePrice" min="1" step="1" value="350000" required>
                         </div>
 
                         <div class="form-group">
-                            <label for="interestRate">Annual Interest Rate (%)</label>
-                            <input type="number" id="interestRate" name="interestRate" min="0" max="100" step="0.01" value="6.5" required>
+                            <label for="downPayment">Down Payment ($)</label>
+                            <input type="number" id="downPayment" min="0" step="1" value="70000">
+                            <small class="form-hint" id="downPaymentPercent">20.0% of home price</small>
                         </div>
 
                         <div class="form-group">
-                            <label for="loanTerm">Loan Term (Years)</label>
-                            <input type="number" id="loanTerm" name="loanTerm" min="1" max="50" step="1" value="30" required>
+                            <label for="interestRate">Interest Rate (%)</label>
+                            <input type="number" id="interestRate" min="0" max="100" step="0.01" value="6.5" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="loanTerm">Loan Term</label>
+                            <select id="loanTerm">
+                                <option value="10">10 years</option>
+                                <option value="15">15 years</option>
+                                <option value="20">20 years</option>
+                                <option value="30" selected>30 years</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="propertyTax">Property Tax ($/year)</label>
+                            <input type="number" id="propertyTax" min="0" step="1" value="4200">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="homeInsurance">Homeowners Insurance ($/year)</label>
+                            <input type="number" id="homeInsurance" min="0" step="1" value="1500">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pmi">PMI ($/month)</label>
+                            <input type="number" id="pmi" min="0" step="1" value="0">
+                            <small class="form-hint" id="pmiHint">Usually required if down payment is less than 20%</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="hoaFees">HOA Fees ($/month)</label>
+                            <input type="number" id="hoaFees" min="0" step="1" value="0">
                         </div>
 
                         <div class="form-group">
                             <label for="startDate">Start Date (Optional)</label>
-                            <input type="month" id="startDate" name="startDate">
+                            <input type="month" id="startDate">
                         </div>
 
                         <button type="submit" class="btn-calculate">Calculate Payment</button>
@@ -81,30 +113,40 @@
                 <h2>Your Mortgage Summary</h2>
 
                 <div class="results-grid">
+                    <div class="result-card result-card-highlight">
+                        <h3>Total Monthly Payment</h3>
+                        <p class="result-value" id="totalMonthly">$0.00</p>
+                    </div>
+
                     <div class="result-card">
-                        <h3>Monthly Payment</h3>
+                        <h3>Principal & Interest</h3>
                         <p class="result-value" id="monthlyPayment">$0.00</p>
+                    </div>
+
+                    <div class="result-card">
+                        <h3>Property Tax</h3>
+                        <p class="result-value" id="monthlyTax">$0.00</p>
+                    </div>
+
+                    <div class="result-card">
+                        <h3>Insurance</h3>
+                        <p class="result-value" id="monthlyInsurance">$0.00</p>
+                    </div>
+
+                    <div class="result-card">
+                        <h3>PMI + HOA</h3>
+                        <p class="result-value" id="monthlyPmiHoa">$0.00</p>
                     </div>
 
                     <div class="result-card">
                         <h3>Total Interest</h3>
                         <p class="result-value" id="totalInterest">$0.00</p>
                     </div>
-
-                    <div class="result-card">
-                        <h3>Total Amount Paid</h3>
-                        <p class="result-value" id="totalAmount">$0.00</p>
-                    </div>
-
-                    <div class="result-card">
-                        <h3>Number of Payments</h3>
-                        <p class="result-value" id="numPayments">0</p>
-                    </div>
                 </div>
 
                 <!-- Chart Section -->
                 <div class="chart-container">
-                    <h3>Principal vs Interest Over Time</h3>
+                    <h3>Monthly Payment Breakdown</h3>
                     <canvas id="paymentChart"></canvas>
                 </div>
 
@@ -173,33 +215,33 @@
                 <h2>Frequently Asked Questions</h2>
 
                 <div class="faq-item">
-                    <h3>What is included in my monthly loan payment?</h3>
-                    <p>Your monthly loan payment calculated here includes only principal and interest. For mortgages, your actual payment may also include property taxes, homeowners insurance, and possibly HOA fees or PMI (private mortgage insurance).</p>
+                    <h3>What is included in my monthly mortgage payment?</h3>
+                    <p>Your monthly mortgage payment typically includes four components known as PITI: Principal (paying down your loan balance), Interest (cost of borrowing), Taxes (property taxes), and Insurance (homeowners insurance). You may also have PMI and HOA fees.</p>
                 </div>
 
                 <div class="faq-item">
-                    <h3>How can I lower my monthly payment?</h3>
-                    <p>You can lower your monthly payment by: getting a lower interest rate, extending the loan term (though you'll pay more interest overall), making a larger down payment to reduce the loan amount, or improving your credit score before applying.</p>
+                    <h3>What is PMI and when do I need it?</h3>
+                    <p>Private Mortgage Insurance (PMI) is usually required when your down payment is less than 20% of the home price. PMI typically costs 0.5% to 1% of the loan amount per year. Once you reach 20% equity in your home, you can request to have PMI removed.</p>
                 </div>
 
                 <div class="faq-item">
-                    <h3>Should I choose a shorter or longer loan term?</h3>
-                    <p>Shorter loan terms (like 15 years) have higher monthly payments but you'll pay much less interest over the life of the loan. Longer terms (like 30 years) have lower monthly payments but cost more in total interest. Choose based on your budget and financial goals.</p>
+                    <h3>Should I get a 15-year or 30-year mortgage?</h3>
+                    <p>A 15-year mortgage has higher monthly payments but you'll pay much less interest overall and build equity faster. A 30-year mortgage has lower monthly payments, giving you more flexibility. For example, on a $280,000 loan at 6.5%, you'd save over $200,000 in interest with a 15-year term.</p>
                 </div>
 
                 <div class="faq-item">
-                    <h3>What is an amortization schedule?</h3>
-                    <p>An amortization schedule is a table showing each loan payment over time, breaking down how much goes toward principal versus interest. It also shows your remaining balance after each payment.</p>
+                    <h3>How much house can I afford?</h3>
+                    <p>A common guideline is the 28/36 rule: your monthly mortgage payment (including taxes and insurance) should not exceed 28% of your gross monthly income, and your total debt payments should not exceed 36%. However, lenders may approve you for more.</p>
                 </div>
 
                 <div class="faq-item">
-                    <h3>Can I pay off my loan early?</h3>
-                    <p>Most loans allow early payoff, but some have prepayment penalties. Check your loan terms. Paying extra toward principal can save you thousands in interest and help you become debt-free faster.</p>
+                    <h3>How much should I put down on a house?</h3>
+                    <p>While 20% down is ideal (avoids PMI), many loan programs accept less. FHA loans require as little as 3.5% down, and some conventional loans accept 3%. However, a larger down payment means a smaller loan, lower monthly payments, and no PMI.</p>
                 </div>
 
                 <div class="faq-item">
-                    <h3>How accurate is this calculator?</h3>
-                    <p>This calculator provides accurate estimates based on the standard amortization formula used by banks and lenders. However, actual payments may vary slightly based on how your lender calculates interest and whether there are additional fees or insurance costs.</p>
+                    <h3>How accurate is this mortgage calculator?</h3>
+                    <p>This calculator provides accurate estimates for principal, interest, taxes, insurance, PMI, and HOA fees. Actual costs may vary based on your specific lender terms, local tax rates, insurance quotes, and closing costs which are not included here.</p>
                 </div>
             </section>
 

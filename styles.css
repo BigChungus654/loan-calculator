@@ -103,6 +103,13 @@
     border-color: #667eea;
 }
 
+.form-hint {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.85rem;
+    color: #888;
+}
+
 /* Reset and Base Styles */
 * {
     margin: 0;
@@ -258,6 +265,18 @@ main {
     font-size: 1.8rem;
     font-weight: 700;
     color: #667eea;
+}
+
+.result-card-highlight {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.result-card-highlight h3 {
+    color: rgba(255,255,255,0.85);
+}
+
+.result-card-highlight .result-value {
+    color: white;
 }
 
 /* Chart Container */
