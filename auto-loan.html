@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJFZG8Q059"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-JJFZG8Q059');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free auto loan calculator. Calculate monthly car payments with trade-in value, down payment, and sales tax. See total cost and amortization schedule.">
+    <meta name="keywords" content="auto loan calculator, car payment calculator, car loan calculator, vehicle financing, auto financing calculator">
+    <title>Auto Loan Calculator - Free Car Payment & Financing Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <nav class="site-nav">
+        <div class="container">
+            <a href="index.html" class="nav-brand">Calculator Hub</a>
+            <div class="nav-links">
+                <a href="loan-calculator.html">Loan Calculator</a>
+                <a href="auto-loan.html" class="active">Auto Loan</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="ad-zone ad-header">
+        <p class="ad-placeholder">Advertisement</p>
+    </div>
+
+    <header>
+        <h1>Auto Loan Calculator</h1>
+        <p class="subtitle">Calculate your monthly car payment with trade-in, down payment, and sales tax</p>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="calculator-section">
+                <div class="calculator-card">
+                    <h2>Calculate Your Car Payment</h2>
+
+                    <form id="autoLoanForm">
+                        <div class="form-group">
+                            <label for="vehiclePrice">Vehicle Price ($)</label>
+                            <input type="number" id="vehiclePrice" min="1" step="1" value="35000" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="downPayment">Down Payment ($)</label>
+                            <input type="number" id="downPayment" min="0" step="1" value="5000">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tradeInValue">Trade-In Value ($)</label>
+                            <input type="number" id="tradeInValue" min="0" step="1" value="0">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="salesTax">Sales Tax Rate (%)</label>
+                            <input type="number" id="salesTax" min="0" max="20" step="0.01" value="7">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="interestRate">Interest Rate (APR %)</label>
+                            <input type="number" id="interestRate" min="0" max="30" step="0.01" value="6.5" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="loanTerm">Loan Term (Months)</label>
+                            <select id="loanTerm">
+                                <option value="24">24 months (2 years)</option>
+                                <option value="36">36 months (3 years)</option>
+                                <option value="48">48 months (4 years)</option>
+                                <option value="60" selected>60 months (5 years)</option>
+                                <option value="72">72 months (6 years)</option>
+                                <option value="84">84 months (7 years)</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn-calculate">Calculate Payment</button>
+                    </form>
+                </div>
+
+                <div class="ad-zone ad-sidebar">
+                    <p class="ad-placeholder">Advertisement</p>
+                </div>
+            </section>
+
+            <section id="resultsSection" class="results-section" style="display: none;">
+                <h2>Your Auto Loan Summary</h2>
+
+                <div class="results-grid">
+                    <div class="result-card">
+                        <h3>Monthly Payment</h3>
+                        <p class="result-value" id="monthlyPayment">$0.00</p>
+                    </div>
+                    <div class="result-card">
+                        <h3>Total Interest</h3>
+                        <p class="result-value" id="totalInterest">$0.00</p>
+                    </div>
+                    <div class="result-card">
+                        <h3>Total Cost</h3>
+                        <p class="result-value" id="totalCost">$0.00</p>
+                    </div>
+                    <div class="result-card">
+                        <h3>Amount Financed</h3>
+                        <p class="result-value" id="amountFinanced">$0.00</p>
+                    </div>
+                    <div class="result-card">
+                        <h3>Sales Tax</h3>
+                        <p class="result-value" id="salesTaxAmount">$0.00</p>
+                    </div>
+                    <div class="result-card">
+                        <h3>Upfront Cost</h3>
+                        <p class="result-value" id="upfrontCost">$0.00</p>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <h3>Payment Breakdown</h3>
+                    <canvas id="paymentChart"></canvas>
+                </div>
+
+                <div class="amortization-section">
+                    <h3>Payment Schedule</h3>
+                    <div class="table-controls">
+                        <label>
+                            <input type="checkbox" id="showAllPayments">
+                            Show all monthly payments (default shows yearly summary)
+                        </label>
+                    </div>
+                    <div class="table-container">
+                        <table id="amortizationTable">
+                            <thead>
+                                <tr>
+                                    <th>Payment #</th>
+                                    <th>Payment</th>
+                                    <th>Principal</th>
+                                    <th>Interest</th>
+                                    <th>Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody id="amortizationBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>How Auto Loans Work</h2>
+
+                <p>An auto loan is a secured loan used to purchase a vehicle. The car itself serves as collateral, which typically means lower interest rates compared to unsecured loans. Understanding how auto loans work helps you negotiate better terms and save money.</p>
+
+                <h3>Key Factors That Affect Your Car Payment</h3>
+                <ul>
+                    <li><strong>Vehicle Price:</strong> The sticker price or negotiated price of the car. Always try to negotiate below MSRP.</li>
+                    <li><strong>Down Payment:</strong> Money you pay upfront. A larger down payment means a smaller loan and lower monthly payments.</li>
+                    <li><strong>Trade-In Value:</strong> The value of your current vehicle applied toward the new purchase, reducing the amount you need to finance.</li>
+                    <li><strong>Sales Tax:</strong> Most states charge sales tax on vehicle purchases, typically 5-10% of the purchase price.</li>
+                    <li><strong>Interest Rate (APR):</strong> The annual cost of borrowing. Rates depend on your credit score, loan term, and whether the car is new or used.</li>
+                    <li><strong>Loan Term:</strong> How long you have to repay. Shorter terms mean higher payments but less total interest paid.</li>
+                </ul>
+
+                <h3>New vs. Used Car Loan Rates</h3>
+                <p>New car loans typically have lower interest rates (5-7% average) compared to used car loans (7-10% average). However, new cars depreciate faster. Consider the total cost of ownership, not just the monthly payment.</p>
+
+                <h3>Tips for Getting the Best Auto Loan</h3>
+                <ul>
+                    <li>Check your credit score before applying — scores above 720 get the best rates</li>
+                    <li>Get pre-approved from your bank or credit union before visiting the dealership</li>
+                    <li>Keep your loan term to 60 months or less to avoid being "upside down" on the loan</li>
+                    <li>Put at least 20% down to avoid negative equity</li>
+                    <li>Compare offers from at least 3 lenders</li>
+                </ul>
+            </section>
+
+            <section class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+
+                <div class="faq-item">
+                    <h3>What credit score do I need for an auto loan?</h3>
+                    <p>You can get an auto loan with most credit scores, but rates vary significantly. Excellent credit (720+) gets rates around 4-6%. Good credit (660-719) gets 6-9%. Fair credit (600-659) gets 9-14%. Poor credit (below 600) may see rates of 14-20% or higher.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Should I choose a longer loan term for lower payments?</h3>
+                    <p>While a 72 or 84-month loan lowers your monthly payment, you'll pay significantly more in interest and risk owing more than the car is worth (negative equity). Financial experts recommend keeping auto loans at 60 months or less.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Is it better to finance through a dealer or bank?</h3>
+                    <p>It's best to get pre-approved by your bank or credit union first, then compare with dealer financing. Sometimes dealers offer promotional rates (like 0% APR), but these often require excellent credit and may mean you can't negotiate on price.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>How much car can I afford?</h3>
+                    <p>A common rule of thumb is that your total car expenses (payment, insurance, gas, maintenance) should not exceed 15-20% of your take-home pay. Your monthly car payment alone should ideally be under 10% of your gross monthly income.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Should I pay off my auto loan early?</h3>
+                    <p>If your loan doesn't have prepayment penalties, paying it off early saves you interest. Even small extra payments toward principal can reduce your total interest cost. Check your loan agreement for any prepayment penalty clauses.</p>
+                </div>
+            </section>
+
+            <div class="ad-zone ad-bottom">
+                <p class="ad-placeholder">Advertisement</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p><strong>Disclaimer:</strong> This calculator is provided for educational and informational purposes only. It does not constitute financial advice. Actual loan terms, payments, taxes, and fees may vary by state and lender. Always confirm terms with your lender before signing.</p>
+            <p>&copy; 2026 Calculator Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="auto-loan.js"></script>
+</body>
+</html>
