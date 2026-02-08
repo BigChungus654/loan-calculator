@@ -199,6 +199,36 @@
         </div>
     </main>
 
+    <section class="email-signup">
+        <div class="email-signup-content">
+            <h2>Get Free Financial Tips</h2>
+            <p>Join our newsletter for weekly money-saving tips, budgeting strategies, and smart financial advice delivered straight to your inbox.</p>
+            <form class="email-signup-form" action="https://formspree.io/f/xplaceholder" method="POST">
+                <input type="email" name="email" placeholder="Enter your email address" required>
+                <button type="submit">Subscribe</button>
+            </form>
+            <div class="email-signup-thankyou">Thank you for subscribing! Check your inbox for a confirmation.</div>
+            <p class="email-signup-privacy">We respect your privacy. Unsubscribe at any time.</p>
+        </div>
+    </section>
+
+    <script>
+    document.querySelector('.email-signup-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var form = this;
+        fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+        }).then(function(response) {
+            if (response.ok) {
+                form.style.display = 'none';
+                form.parentElement.querySelector('.email-signup-thankyou').style.display = 'block';
+            }
+        });
+    });
+    </script>
+
     <footer>
         <div class="container">
             <p><strong>Disclaimer:</strong> This calculator provides estimates for educational purposes only. Lender qualification criteria vary. DTI is just one factor in loan approval. Contact a lender for specific qualification information.</p>

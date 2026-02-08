@@ -536,6 +536,99 @@ tbody tr:last-child td {
     letter-spacing: 1px;
 }
 
+/* Email Signup Section */
+.email-signup {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 60px 20px;
+    text-align: center;
+    color: white;
+}
+
+.email-signup-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.email-signup h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.email-signup p {
+    font-size: 1.1rem;
+    opacity: 0.92;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.email-signup-form {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.email-signup-form input[type="email"] {
+    flex: 1 1 280px;
+    max-width: 400px;
+    padding: 14px 20px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 8px;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    outline: none;
+    transition: border-color 0.3s, background 0.3s;
+}
+
+.email-signup-form input[type="email"]::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.email-signup-form input[type="email"]:focus {
+    border-color: white;
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.email-signup-form button {
+    padding: 14px 32px;
+    background: white;
+    color: #667eea;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    white-space: nowrap;
+}
+
+.email-signup-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.email-signup-form button:active {
+    transform: translateY(0);
+}
+
+.email-signup-thankyou {
+    display: none;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 10px;
+    padding: 14px 20px;
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 8px;
+}
+
+.email-signup-privacy {
+    margin-top: 14px;
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
 /* Footer */
 footer {
     background: #2d3748;
@@ -624,5 +717,23 @@ footer strong {
 
     th, td {
         padding: 8px 5px;
+    }
+
+    .email-signup {
+        padding: 40px 15px;
+    }
+
+    .email-signup h2 {
+        font-size: 1.5rem;
+    }
+
+    .email-signup p {
+        font-size: 0.95rem;
+    }
+
+    .email-signup-form input[type="email"],
+    .email-signup-form button {
+        width: 100%;
+        flex: 1 1 100%;
     }
 }
