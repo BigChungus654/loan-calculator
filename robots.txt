@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bigchungus654.github.io/loan-calculator/sitemap.xml
