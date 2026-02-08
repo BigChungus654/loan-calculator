@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJFZG8Q059"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-JJFZG8Q059');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free compound interest calculator. See how your investments grow with compound interest over time. Calculate daily, monthly, quarterly, or annual compounding.">
+    <meta name="keywords" content="compound interest calculator, investment calculator, compound interest formula, investment growth calculator, interest calculator">
+    <title>Compound Interest Calculator - See How Your Money Grows</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <nav class="site-nav">
+        <div class="container">
+            <a href="index.html" class="nav-brand">Calculator Hub</a>
+            <div class="nav-links">
+                <a href="mortgage-calculator.html">Mortgage</a>
+                <a href="auto-loan.html">Auto Loan</a>
+                <a href="credit-card-payoff.html">Credit Card</a>
+                <a href="savings-calculator.html">Savings</a>
+                <a href="compound-interest.html" class="active">Compound Interest</a>
+                <a href="debt-to-income.html">DTI</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="ad-zone ad-header">
+        <p class="ad-placeholder">Advertisement</p>
+    </div>
+
+    <header>
+        <h1>Compound Interest Calculator</h1>
+        <p class="subtitle">See how compound interest grows your investments over time</p>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="calculator-section">
+                <div class="calculator-card">
+                    <h2>Calculate Compound Interest</h2>
+
+                    <form id="compoundForm">
+                        <div class="form-group">
+                            <label for="principal">Initial Investment ($)</label>
+                            <input type="number" id="principal" min="0" step="1" value="10000" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="monthlyAdd">Monthly Contribution ($)</label>
+                            <input type="number" id="monthlyAdd" min="0" step="1" value="500">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="rate">Annual Interest Rate (%)</label>
+                            <input type="number" id="rate" min="0" max="50" step="0.01" value="7" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="compounding">Compounding Frequency</label>
+                            <select id="compounding">
+                                <option value="365">Daily</option>
+                                <option value="12" selected>Monthly</option>
+                                <option value="4">Quarterly</option>
+                                <option value="2">Semi-Annually</option>
+                                <option value="1">Annually</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="years">Investment Period (Years)</label>
+                            <input type="number" id="years" min="1" max="50" step="1" value="20" required>
+                        </div>
+
+                        <button type="submit" class="btn-calculate">Calculate Growth</button>
+                    </form>
+                </div>
+
+                <div class="ad-zone ad-sidebar">
+                    <p class="ad-placeholder">Advertisement</p>
+                </div>
+            </section>
+
+            <section id="resultsSection" class="results-section" style="display: none;">
+                <h2>Your Investment Growth</h2>
+
+                <div class="results-grid">
+                    <div class="result-card result-card-highlight">
+                        <h3>Future Value</h3>
+                        <p class="result-value" id="futureValue">$0.00</p>
+                    </div>
+                    <div class="result-card">
+                        <h3>Total Contributions</h3>
+                        <p class="result-value" id="totalContributions">$0.00</p>
+                    </div>
+                    <div class="result-card">
+                        <h3>Total Interest</h3>
+                        <p class="result-value" id="totalInterest">$0.00</p>
+                    </div>
+                    <div class="result-card">
+                        <h3>Interest as % of Total</h3>
+                        <p class="result-value" id="interestPercent">0%</p>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <h3>Investment Growth Over Time</h3>
+                    <canvas id="growthChart"></canvas>
+                </div>
+
+                <div class="amortization-section">
+                    <h3>Year-by-Year Growth</h3>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Year</th>
+                                    <th>Contributions</th>
+                                    <th>Interest Earned</th>
+                                    <th>Total Value</th>
+                                </tr>
+                            </thead>
+                            <tbody id="growthBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Understanding Compound Interest</h2>
+
+                <p>Albert Einstein reportedly called compound interest "the eighth wonder of the world." Whether or not he actually said it, the math behind compound interest is truly powerful — it's how ordinary people build extraordinary wealth.</p>
+
+                <h3>The Compound Interest Formula</h3>
+                <div class="formula">
+                    A = P(1 + r/n)^(nt)
+                </div>
+                <p>Where:</p>
+                <ul>
+                    <li><strong>A</strong> = Final amount</li>
+                    <li><strong>P</strong> = Principal (initial investment)</li>
+                    <li><strong>r</strong> = Annual interest rate (decimal)</li>
+                    <li><strong>n</strong> = Number of times interest compounds per year</li>
+                    <li><strong>t</strong> = Number of years</li>
+                </ul>
+
+                <h3>Simple vs. Compound Interest</h3>
+                <p>Simple interest only earns interest on the original principal. Compound interest earns interest on the principal AND on previously earned interest. Over time, this creates exponential growth. For example, $10,000 at 7% simple interest earns $700/year forever. With compound interest, it earns $700 the first year, $749 the second, $801.43 the third, and so on — accelerating each year.</p>
+
+                <h3>The Rule of 72</h3>
+                <p>Want a quick estimate of how long it takes to double your money? Divide 72 by your interest rate. At 7%, your money doubles in about 10.3 years. At 10%, it doubles in about 7.2 years.</p>
+            </section>
+
+            <section class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+
+                <div class="faq-item">
+                    <h3>Does compounding frequency matter?</h3>
+                    <p>Yes, but less than you might think. More frequent compounding gives slightly higher returns. For example, $10,000 at 7% for 20 years: annual compounding gives $38,697, while daily compounding gives $40,552. The rate and time period matter much more than compounding frequency.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>What's a realistic rate of return?</h3>
+                    <p>The S&P 500 has historically returned about 10% annually before inflation (about 7% after inflation). High-yield savings accounts offer 4-5%. Bonds typically return 3-5%. Use a conservative estimate for planning — 7% is commonly used for long-term stock market investments.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Why is starting early so important?</h3>
+                    <p>Because of compound interest, time is more powerful than the amount you invest. $200/month from age 25 to 65 at 7% gives you about $528,000. Starting at 35 with $400/month at the same rate gives about $489,000 — less money despite contributing twice as much monthly.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>How does inflation affect compound interest?</h3>
+                    <p>Inflation reduces the purchasing power of your returns. If you earn 7% but inflation is 3%, your real return is about 4%. This calculator shows nominal returns. For inflation-adjusted estimates, subtract the expected inflation rate (typically 2-3%) from your interest rate.</p>
+                </div>
+            </section>
+
+            <div class="ad-zone ad-bottom">
+                <p class="ad-placeholder">Advertisement</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p><strong>Disclaimer:</strong> This calculator is for educational purposes only. Actual investment returns vary and are not guaranteed. Past performance does not guarantee future results. This is not investment advice. Consult a financial advisor for personalized guidance.</p>
+            <p>&copy; 2026 Calculator Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="compound-interest.js"></script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJFZG8Q059"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-JJFZG8Q059');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free savings calculator. See how your savings will grow over time with compound interest and monthly contributions. Plan your financial future.">
+    <meta name="keywords" content="savings calculator, savings growth calculator, how much will I save, savings interest calculator, savings goal calculator">
+    <title>Savings Calculator - How Much Will My Savings Grow?</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <nav class="site-nav">
+        <div class="container">
+            <a href="index.html" class="nav-brand">Calculator Hub</a>
+            <div class="nav-links">
+                <a href="mortgage-calculator.html">Mortgage</a>
+                <a href="auto-loan.html">Auto Loan</a>
+                <a href="credit-card-payoff.html">Credit Card</a>
+                <a href="savings-calculator.html" class="active">Savings</a>
+                <a href="compound-interest.html">Compound Interest</a>
+                <a href="debt-to-income.html">DTI</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="ad-zone ad-header">
+        <p class="ad-placeholder">Advertisement</p>
+    </div>
+
+    <header>
+        <h1>Savings Calculator</h1>
+        <p class="subtitle">See how your money grows with regular contributions and compound interest</p>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="calculator-section">
+                <div class="calculator-card">
+                    <h2>Calculate Your Savings Growth</h2>
+
+                    <form id="savingsForm">
+                        <div class="form-group">
+                            <label for="initialDeposit">Initial Deposit ($)</label>
+                            <input type="number" id="initialDeposit" min="0" step="1" value="1000" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="monthlyContribution">Monthly Contribution ($)</label>
+                            <input type="number" id="monthlyContribution" min="0" step="1" value="200" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="annualRate">Annual Interest Rate (%)</label>
+                            <input type="number" id="annualRate" min="0" max="20" step="0.01" value="4.5" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="years">Time Period (Years)</label>
+                            <input type="number" id="years" min="1" max="50" step="1" value="10" required>
+                        </div>
+
+                        <button type="submit" class="btn-calculate">Calculate Savings</button>
+                    </form>
+                </div>
+
+                <div class="ad-zone ad-sidebar">
+                    <p class="ad-placeholder">Advertisement</p>
+                </div>
+            </section>
+
+            <section id="resultsSection" class="results-section" style="display: none;">
+                <h2>Your Savings Projection</h2>
+
+                <div class="results-grid">
+                    <div class="result-card result-card-highlight">
+                        <h3>Future Value</h3>
+                        <p class="result-value" id="futureValue">$0.00</p>
+                    </div>
+                    <div class="result-card">
+                        <h3>Total Contributions</h3>
+                        <p class="result-value" id="totalContributions">$0.00</p>
+                    </div>
+                    <div class="result-card">
+                        <h3>Interest Earned</h3>
+                        <p class="result-value" id="interestEarned">$0.00</p>
+                    </div>
+                    <div class="result-card">
+                        <h3>Effective Growth</h3>
+                        <p class="result-value" id="effectiveGrowth">0%</p>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <h3>Savings Growth Over Time</h3>
+                    <canvas id="savingsChart"></canvas>
+                </div>
+
+                <div class="amortization-section">
+                    <h3>Year-by-Year Breakdown</h3>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Year</th>
+                                    <th>Contributions</th>
+                                    <th>Interest</th>
+                                    <th>Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody id="yearlyBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>How Savings Growth Works</h2>
+
+                <p>The power of saving comes from two forces working together: regular contributions and compound interest. Even small, consistent deposits can grow into significant wealth over time.</p>
+
+                <h3>The Power of Compound Interest</h3>
+                <p>Compound interest means you earn interest on your interest. If you deposit $1,000 at 5% annual interest, you earn $50 in year one. In year two, you earn interest on $1,050, giving you $52.50. This snowball effect accelerates over time.</p>
+
+                <h3>The Impact of Starting Early</h3>
+                <p>Time is the most powerful factor in savings growth. Someone who saves $200/month starting at age 25 will have significantly more at retirement than someone who saves $400/month starting at age 35 — even though they contributed less total money.</p>
+
+                <h3>Where to Save</h3>
+                <ul>
+                    <li><strong>High-Yield Savings Account:</strong> Currently offering 4-5% APY. Best for emergency funds and short-term savings. FDIC insured.</li>
+                    <li><strong>Certificates of Deposit (CDs):</strong> Lock in a rate for a fixed term (3 months to 5 years). Often slightly higher rates than savings accounts.</li>
+                    <li><strong>Money Market Accounts:</strong> Similar to savings accounts with check-writing privileges. Competitive rates.</li>
+                    <li><strong>Treasury Bills/Bonds:</strong> Government-backed securities. Very safe with competitive yields.</li>
+                </ul>
+            </section>
+
+            <section class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+
+                <div class="faq-item">
+                    <h3>How much should I save each month?</h3>
+                    <p>A common guideline is the 50/30/20 rule: 50% of income for needs, 30% for wants, and 20% for savings and debt repayment. Start with whatever you can and increase over time. Even $50/month adds up.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>What's the difference between APR and APY?</h3>
+                    <p>APR (Annual Percentage Rate) is the simple interest rate. APY (Annual Percentage Yield) includes the effect of compounding. For savings, look at APY — it shows your actual earnings. A 5% APR compounded monthly gives about 5.12% APY.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>How much should I have in an emergency fund?</h3>
+                    <p>Most financial experts recommend 3-6 months of essential expenses in an easily accessible savings account. If you have variable income or are self-employed, aim for 6-12 months.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Should I save or pay off debt first?</h3>
+                    <p>Generally, build a small emergency fund ($1,000-2,000) first, then focus on high-interest debt (credit cards), then build your full emergency fund, then invest. However, always contribute enough to get your employer's 401(k) match — that's free money.</p>
+                </div>
+            </section>
+
+            <div class="ad-zone ad-bottom">
+                <p class="ad-placeholder">Advertisement</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p><strong>Disclaimer:</strong> This calculator provides estimates based on a fixed interest rate. Actual returns may vary. Savings accounts and investments carry different levels of risk. This is not investment advice.</p>
+            <p>&copy; 2026 Calculator Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="savings-calculator.js"></script>
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJFZG8Q059"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-JJFZG8Q059');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free debt-to-income ratio calculator. Find out your DTI ratio and see if you qualify for a mortgage. Lenders use DTI to determine how much house you can afford.">
+    <meta name="keywords" content="debt to income ratio calculator, DTI calculator, mortgage qualification, how much house can I afford, debt ratio calculator">
+    <title>Debt-to-Income Ratio Calculator - Do I Qualify for a Mortgage?</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="site-nav">
+        <div class="container">
+            <a href="index.html" class="nav-brand">Calculator Hub</a>
+            <div class="nav-links">
+                <a href="mortgage-calculator.html">Mortgage</a>
+                <a href="auto-loan.html">Auto Loan</a>
+                <a href="credit-card-payoff.html">Credit Card</a>
+                <a href="savings-calculator.html">Savings</a>
+                <a href="compound-interest.html">Compound Interest</a>
+                <a href="debt-to-income.html" class="active">DTI</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="ad-zone ad-header">
+        <p class="ad-placeholder">Advertisement</p>
+    </div>
+
+    <header>
+        <h1>Debt-to-Income Ratio Calculator</h1>
+        <p class="subtitle">Find out your DTI ratio and what it means for mortgage qualification</p>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="calculator-section">
+                <div class="calculator-card">
+                    <h2>Calculate Your DTI Ratio</h2>
+
+                    <form id="dtiForm">
+                        <h3 style="color: #667eea; margin-bottom: 15px;">Monthly Income (Before Taxes)</h3>
+
+                        <div class="form-group">
+                            <label for="salary">Salary / Wages ($)</label>
+                            <input type="number" id="salary" min="0" step="1" value="5000" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="otherIncome">Other Income ($)</label>
+                            <input type="number" id="otherIncome" min="0" step="1" value="0">
+                            <small class="form-hint">Bonuses, freelance, rental income, etc.</small>
+                        </div>
+
+                        <h3 style="color: #667eea; margin-bottom: 15px; margin-top: 30px;">Monthly Debt Payments</h3>
+
+                        <div class="form-group">
+                            <label for="mortgageRent">Mortgage / Rent ($)</label>
+                            <input type="number" id="mortgageRent" min="0" step="1" value="1200">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="carPayment">Car Payment ($)</label>
+                            <input type="number" id="carPayment" min="0" step="1" value="350">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="studentLoans">Student Loans ($)</label>
+                            <input type="number" id="studentLoans" min="0" step="1" value="200">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="creditCardMin">Credit Card Minimum Payments ($)</label>
+                            <input type="number" id="creditCardMin" min="0" step="1" value="100">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="otherDebt">Other Debt Payments ($)</label>
+                            <input type="number" id="otherDebt" min="0" step="1" value="0">
+                            <small class="form-hint">Personal loans, child support, alimony, etc.</small>
+                        </div>
+
+                        <button type="submit" class="btn-calculate">Calculate DTI Ratio</button>
+                    </form>
+                </div>
+
+                <div class="ad-zone ad-sidebar">
+                    <p class="ad-placeholder">Advertisement</p>
+                </div>
+            </section>
+
+            <section id="resultsSection" class="results-section" style="display: none;">
+                <h2>Your DTI Results</h2>
+
+                <div class="results-grid">
+                    <div class="result-card" id="dtiCard">
+                        <h3>Debt-to-Income Ratio</h3>
+                        <p class="result-value" id="dtiRatio">0%</p>
+                    </div>
+                    <div class="result-card">
+                        <h3>Rating</h3>
+                        <p class="result-value" id="dtiRating">-</p>
+                    </div>
+                    <div class="result-card">
+                        <h3>Monthly Income</h3>
+                        <p class="result-value" id="totalIncome">$0</p>
+                    </div>
+                    <div class="result-card">
+                        <h3>Monthly Debt</h3>
+                        <p class="result-value" id="totalDebt">$0</p>
+                    </div>
+                    <div class="result-card">
+                        <h3>Remaining Income</h3>
+                        <p class="result-value" id="remainingIncome">$0</p>
+                    </div>
+                </div>
+
+                <div id="dtiMeter" class="dti-meter-section">
+                    <h3>Where You Stand</h3>
+                    <div class="dti-meter">
+                        <div class="dti-meter-bar">
+                            <div class="dti-zone dti-excellent" style="width:35%">35% or less<br>Excellent</div>
+                            <div class="dti-zone dti-good" style="width:15%">36-43%<br>Acceptable</div>
+                            <div class="dti-zone dti-poor" style="width:15%">44-50%<br>Risky</div>
+                            <div class="dti-zone dti-bad" style="width:35%">50%+<br>Too High</div>
+                        </div>
+                        <div class="dti-marker" id="dtiMarker"></div>
+                    </div>
+                </div>
+
+                <div class="content-section" style="margin-top: 30px;">
+                    <h3>What This Means for You</h3>
+                    <p id="dtiExplanation"></p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Understanding Debt-to-Income Ratio</h2>
+
+                <p>Your debt-to-income (DTI) ratio is one of the most important numbers lenders look at when you apply for a mortgage or loan. It measures how much of your monthly income goes toward debt payments.</p>
+
+                <h3>How DTI Is Calculated</h3>
+                <div class="formula">
+                    DTI = (Total Monthly Debt Payments ÷ Gross Monthly Income) × 100
+                </div>
+
+                <h3>DTI Ranges and What They Mean</h3>
+                <ul>
+                    <li><strong>35% or less:</strong> Excellent. You're managing debt well and will qualify for the best loan terms.</li>
+                    <li><strong>36% - 43%:</strong> Acceptable. Most conventional mortgages require a DTI under 43%. You can likely qualify but may not get the best rates.</li>
+                    <li><strong>44% - 50%:</strong> Risky. You may still qualify for some loans (FHA allows up to 50% in some cases), but lenders see you as higher risk.</li>
+                    <li><strong>Over 50%:</strong> Too high. Most lenders will not approve a mortgage at this level. Focus on paying down debt first.</li>
+                </ul>
+
+                <h3>How to Lower Your DTI</h3>
+                <ul>
+                    <li>Pay off credit cards and small debts</li>
+                    <li>Avoid taking on new debt before applying for a mortgage</li>
+                    <li>Increase your income through raises, side jobs, or adding a co-borrower</li>
+                    <li>Refinance existing loans to lower monthly payments</li>
+                    <li>Pay down car loans or student loans if possible</li>
+                </ul>
+            </section>
+
+            <section class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+
+                <div class="faq-item">
+                    <h3>What DTI do I need for a mortgage?</h3>
+                    <p>Most conventional loans require a DTI of 43% or less. FHA loans may allow up to 50% with compensating factors. VA loans are more flexible but generally want to see 41% or below. The lower your DTI, the better your chances of approval and the better your interest rate.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>What debts are included in DTI?</h3>
+                    <p>DTI includes: mortgage/rent, car loans, student loans, credit card minimum payments, personal loans, child support, and alimony. It does NOT include: utilities, groceries, insurance (unless bundled with mortgage), subscriptions, or daily living expenses.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Front-end vs. back-end DTI — what's the difference?</h3>
+                    <p>Front-end DTI (or housing ratio) only includes housing costs. Back-end DTI includes all debts. Lenders typically want front-end DTI under 28% and back-end DTI under 36-43%. This calculator shows your back-end DTI.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Does my DTI affect my credit score?</h3>
+                    <p>DTI itself doesn't appear on your credit report and doesn't directly affect your credit score. However, high credit card balances (which contribute to DTI) do affect your credit utilization ratio, which impacts your score.</p>
+                </div>
+            </section>
+
+            <div class="ad-zone ad-bottom">
+                <p class="ad-placeholder">Advertisement</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p><strong>Disclaimer:</strong> This calculator provides estimates for educational purposes only. Lender qualification criteria vary. DTI is just one factor in loan approval. Contact a lender for specific qualification information.</p>
+            <p>&copy; 2026 Calculator Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="debt-to-income.js"></script>
+</body>
+</html>
