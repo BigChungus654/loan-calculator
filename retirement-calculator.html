@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJFZG8Q059"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-JJFZG8Q059');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free retirement calculator. Find out how much you need to save for retirement. See projected savings growth, monthly retirement income using the 4% rule, and whether you're on track.">
+    <meta name="keywords" content="retirement calculator, how much do I need to retire, retirement savings calculator, retirement planning calculator, 401k calculator">
+    <title>Retirement Calculator - How Much Do I Need to Retire?</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <nav class="site-nav">
+        <div class="container">
+            <a href="index.html" class="nav-brand">Calculator Hub</a>
+            <div class="nav-links">
+                <a href="mortgage-calculator.html">Mortgage</a>
+                <a href="auto-loan.html">Auto Loan</a>
+                <a href="credit-card-payoff.html">Credit Card</a>
+                <a href="savings-calculator.html">Savings</a>
+                <a href="compound-interest.html">Compound Interest</a>
+                <a href="debt-to-income.html">DTI</a>
+                <a href="tip-calculator.html">Tip</a>
+                <a href="paycheck-calculator.html">Paycheck</a>
+                <a href="retirement-calculator.html" class="active">Retirement</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="ad-zone ad-header">
+        <p class="ad-placeholder">Advertisement</p>
+    </div>
+
+    <header>
+        <h1>Retirement Calculator</h1>
+        <p class="subtitle">Find out if you're on track for a comfortable retirement</p>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="calculator-section">
+                <div class="calculator-card">
+                    <h2>Plan Your Retirement</h2>
+
+                    <form id="retirementForm">
+                        <div class="form-group">
+                            <label for="currentAge">Current Age</label>
+                            <input type="number" id="currentAge" min="18" max="99" step="1" value="30" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="retirementAge">Retirement Age</label>
+                            <input type="number" id="retirementAge" min="30" max="99" step="1" value="65" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="currentSavings">Current Savings ($)</label>
+                            <input type="number" id="currentSavings" min="0" step="1" value="50000" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="monthlyContribution">Monthly Contribution ($)</label>
+                            <input type="number" id="monthlyContribution" min="0" step="1" value="500" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="expectedReturn">Expected Annual Return (%)</label>
+                            <input type="number" id="expectedReturn" min="0" max="20" step="0.1" value="7" required>
+                            <span class="form-hint">Historical stock market average is ~7% after inflation</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inflationRate">Expected Inflation Rate (%)</label>
+                            <input type="number" id="inflationRate" min="0" max="10" step="0.1" value="3" required>
+                        </div>
+
+                        <button type="submit" class="btn-calculate">Calculate Retirement</button>
+                    </form>
+                </div>
+
+                <div class="ad-zone ad-sidebar">
+                    <p class="ad-placeholder">Advertisement</p>
+                </div>
+            </section>
+
+            <section id="resultsSection" class="results-section" style="display: none;">
+                <h2>Your Retirement Projection</h2>
+
+                <div class="results-grid">
+                    <div class="result-card result-card-highlight">
+                        <h3>Projected Savings at Retirement</h3>
+                        <p class="result-value" id="projectedSavings">$0.00</p>
+                    </div>
+                    <div class="result-card">
+                        <h3>In Today's Dollars</h3>
+                        <p class="result-value" id="projectedSavingsReal">$0.00</p>
+                    </div>
+                    <div class="result-card">
+                        <h3>Monthly Income (4% Rule)</h3>
+                        <p class="result-value" id="monthlyIncome">$0.00</p>
+                    </div>
+                    <div class="result-card">
+                        <h3>Total Contributions</h3>
+                        <p class="result-value" id="totalContributions">$0.00</p>
+                    </div>
+                    <div class="result-card">
+                        <h3>Total Growth</h3>
+                        <p class="result-value" id="totalGrowth">$0.00</p>
+                    </div>
+                    <div class="result-card">
+                        <h3>Years to Retirement</h3>
+                        <p class="result-value" id="yearsToRetirement">0</p>
+                    </div>
+                </div>
+
+                <div id="trackStatus" class="retirement-status" style="display:none;">
+                </div>
+
+                <div class="chart-container">
+                    <h3>Savings Growth Over Time</h3>
+                    <canvas id="retirementChart"></canvas>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>How to Plan for Retirement</h2>
+
+                <p>Retirement planning is one of the most important financial tasks you will undertake. The earlier you start saving, the more time compound interest has to grow your wealth. Even small monthly contributions can add up to significant amounts over decades.</p>
+
+                <h3>The 4% Rule</h3>
+                <p>The 4% rule is a widely used guideline for retirement withdrawals. It suggests that you can safely withdraw 4% of your retirement savings in the first year of retirement, then adjust that amount for inflation each subsequent year. This strategy is designed to make your savings last at least 30 years.</p>
+
+                <div class="formula">
+                    Annual Retirement Income = Total Savings x 0.04
+                </div>
+
+                <h3>How Much Do You Need to Retire?</h3>
+                <ul>
+                    <li><strong>The 25x Rule:</strong> Multiply your desired annual retirement income by 25. For example, if you want $60,000 per year, you need $1,500,000 saved.</li>
+                    <li><strong>70-80% Rule:</strong> Plan to need 70-80% of your pre-retirement income annually in retirement.</li>
+                    <li><strong>Social Security:</strong> Factor in your expected Social Security benefits, which replace about 40% of pre-retirement income for average earners.</li>
+                </ul>
+
+                <h3>Retirement Savings Tips</h3>
+                <ul>
+                    <li>Start saving as early as possible to maximize compound growth</li>
+                    <li>Max out employer 401(k) matching -- it is free money</li>
+                    <li>Contribute to both 401(k) and IRA accounts for tax diversification</li>
+                    <li>Increase contributions by 1-2% each year or with every raise</li>
+                    <li>Avoid withdrawing from retirement accounts early (10% penalty before age 59.5)</li>
+                    <li>Diversify your investment portfolio based on your age and risk tolerance</li>
+                </ul>
+
+                <h3>Understanding Investment Returns</h3>
+                <p>The S&P 500 has historically returned about 10% annually before inflation, or about 7% after inflation. However, past performance does not guarantee future results. A diversified portfolio of stocks and bonds may return between 5-8% after inflation, depending on your asset allocation.</p>
+            </section>
+
+            <section class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+
+                <div class="faq-item">
+                    <h3>How much should I save for retirement each month?</h3>
+                    <p>Financial advisors commonly recommend saving 10-15% of your gross income for retirement. If you started late, you may need to save 20% or more. The exact amount depends on your age, current savings, desired retirement lifestyle, and expected Social Security benefits.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>What is the best age to retire?</h3>
+                    <p>The traditional retirement age is 65, which aligns with Medicare eligibility. You can start collecting Social Security at 62 (reduced benefits) or wait until 67 for full benefits. Delaying to age 70 maximizes your Social Security payment. The best age depends on your health, savings, and personal goals.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Is the 4% rule still valid?</h3>
+                    <p>The 4% rule was developed in the 1990s based on historical market data. Some financial experts now suggest a 3-3.5% withdrawal rate may be safer given lower expected returns and longer life expectancies. Others argue 4% remains reasonable with a diversified portfolio.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Should I pay off debt or save for retirement?</h3>
+                    <p>Generally, you should do both. Always get your full employer 401(k) match first. Then pay off high-interest debt (credit cards, personal loans). Once high-interest debt is gone, maximize retirement contributions. Low-interest debt (mortgage) can be paid alongside retirement saving.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>How does inflation affect my retirement savings?</h3>
+                    <p>Inflation reduces the purchasing power of your money over time. At 3% inflation, $1 million today would have the purchasing power of about $475,000 in 25 years. This is why it is important to factor inflation into your retirement planning and invest in assets that historically outpace inflation.</p>
+                </div>
+            </section>
+
+            <div class="ad-zone ad-bottom">
+                <p class="ad-placeholder">Advertisement</p>
+            </div>
+        </div>
+    </main>
+
+    <section class="email-signup">
+        <div class="email-signup-content">
+            <h2>Get Free Financial Tips</h2>
+            <p>Join our newsletter for weekly money-saving tips, budgeting strategies, and smart financial advice delivered straight to your inbox.</p>
+            <form class="email-signup-form" action="https://formspree.io/f/mwvnkypd" method="POST">
+                <input type="email" name="email" placeholder="Enter your email address" required>
+                <button type="submit">Subscribe</button>
+            </form>
+            <div class="email-signup-thankyou">Thank you for subscribing! Check your inbox for a confirmation.</div>
+            <p class="email-signup-privacy">We respect your privacy. Unsubscribe at any time.</p>
+        </div>
+    </section>
+
+    <script>
+    document.querySelector('.email-signup-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var form = this;
+        fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+        }).then(function(response) {
+            if (response.ok) {
+                form.style.display = 'none';
+                form.parentElement.querySelector('.email-signup-thankyou').style.display = 'block';
+            }
+        });
+    });
+    </script>
+
+    <footer>
+        <div class="container">
+            <p><strong>Disclaimer:</strong> This calculator is provided for educational and informational purposes only. It does not constitute financial advice. Actual investment returns will vary. Past performance does not guarantee future results. Consult with a qualified financial advisor for personalized retirement planning.</p>
+            <p>&copy; 2026 Calculator Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="retirement-calculator.js"></script>
+</body>
+</html>

@@ -647,6 +647,98 @@ footer strong {
     color: #fff;
 }
 
+/* Tip Preset Buttons */
+.tip-preset-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.tip-preset {
+    flex: 1 1 auto;
+    min-width: 60px;
+    padding: 12px 16px;
+    background: #f5f7fa;
+    border: 2px solid #e1e8ed;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #555;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.tip-preset:hover {
+    border-color: #667eea;
+    color: #667eea;
+}
+
+.tip-preset.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: transparent;
+}
+
+.custom-tip-input {
+    margin-top: 10px;
+}
+
+/* Pay Frequency Section */
+.pay-frequency-section {
+    margin-top: 30px;
+}
+
+.pay-frequency-section h3 {
+    color: #555;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+/* Retirement Status */
+.retirement-status {
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.retirement-status h3 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.retirement-status p {
+    color: #555;
+    line-height: 1.6;
+}
+
+.retirement-on-track {
+    background: #f0fff4;
+    border: 2px solid #38a169;
+}
+
+.retirement-on-track h3 {
+    color: #38a169;
+}
+
+.retirement-caution {
+    background: #fffff0;
+    border: 2px solid #d69e2e;
+}
+
+.retirement-caution h3 {
+    color: #d69e2e;
+}
+
+.retirement-behind {
+    background: #fff5f5;
+    border: 2px solid #e53e3e;
+}
+
+.retirement-behind h3 {
+    color: #e53e3e;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .nav-links {

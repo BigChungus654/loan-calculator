@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJFZG8Q059"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-JJFZG8Q059');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free paycheck calculator. Calculate your take-home pay after federal taxes, state taxes, Social Security, and Medicare. See monthly, bi-weekly, and weekly breakdowns.">
+    <meta name="keywords" content="paycheck calculator, salary calculator, take home pay calculator, net pay calculator, income tax calculator">
+    <title>Paycheck Calculator - Free Salary & Take Home Pay Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <nav class="site-nav">
+        <div class="container">
+            <a href="index.html" class="nav-brand">Calculator Hub</a>
+            <div class="nav-links">
+                <a href="mortgage-calculator.html">Mortgage</a>
+                <a href="auto-loan.html">Auto Loan</a>
+                <a href="credit-card-payoff.html">Credit Card</a>
+                <a href="savings-calculator.html">Savings</a>
+                <a href="compound-interest.html">Compound Interest</a>
+                <a href="debt-to-income.html">DTI</a>
+                <a href="tip-calculator.html">Tip</a>
+                <a href="paycheck-calculator.html" class="active">Paycheck</a>
+                <a href="retirement-calculator.html">Retirement</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="ad-zone ad-header">
+        <p class="ad-placeholder">Advertisement</p>
+    </div>
+
+    <header>
+        <h1>Paycheck Calculator</h1>
+        <p class="subtitle">Calculate your take-home pay after taxes and deductions</p>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="calculator-section">
+                <div class="calculator-card">
+                    <h2>Calculate Your Take-Home Pay</h2>
+
+                    <form id="paycheckForm">
+                        <div class="form-group">
+                            <label for="payType">Pay Type</label>
+                            <select id="payType">
+                                <option value="salary">Annual Salary</option>
+                                <option value="hourly">Hourly Rate</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" id="salaryGroup">
+                            <label for="annualSalary">Annual Salary ($)</label>
+                            <input type="number" id="annualSalary" min="1" step="1" value="65000" required>
+                        </div>
+
+                        <div class="form-group" id="hourlyGroup" style="display:none;">
+                            <label for="hourlyRate">Hourly Rate ($)</label>
+                            <input type="number" id="hourlyRate" min="0.01" step="0.01" value="30">
+                        </div>
+
+                        <div class="form-group" id="hoursGroup" style="display:none;">
+                            <label for="hoursPerWeek">Hours Per Week</label>
+                            <input type="number" id="hoursPerWeek" min="1" max="168" step="0.5" value="40">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="filingStatus">Filing Status</label>
+                            <select id="filingStatus">
+                                <option value="single">Single</option>
+                                <option value="married">Married Filing Jointly</option>
+                                <option value="head">Head of Household</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="stateTaxRate">State Tax Rate (%)</label>
+                            <input type="number" id="stateTaxRate" min="0" max="15" step="0.01" value="5">
+                            <span class="form-hint">Enter 0 for states with no income tax (TX, FL, WA, etc.)</span>
+                        </div>
+
+                        <button type="submit" class="btn-calculate">Calculate Paycheck</button>
+                    </form>
+                </div>
+
+                <div class="ad-zone ad-sidebar">
+                    <p class="ad-placeholder">Advertisement</p>
+                </div>
+            </section>
+
+            <section id="resultsSection" class="results-section" style="display: none;">
+                <h2>Your Paycheck Summary</h2>
+
+                <div class="results-grid">
+                    <div class="result-card">
+                        <h3>Gross Annual Pay</h3>
+                        <p class="result-value" id="grossAnnual">$0.00</p>
+                    </div>
+                    <div class="result-card">
+                        <h3>Federal Tax</h3>
+                        <p class="result-value" id="federalTax">$0.00</p>
+                    </div>
+                    <div class="result-card">
+                        <h3>State Tax</h3>
+                        <p class="result-value" id="stateTax">$0.00</p>
+                    </div>
+                    <div class="result-card">
+                        <h3>Social Security (6.2%)</h3>
+                        <p class="result-value" id="socialSecurity">$0.00</p>
+                    </div>
+                    <div class="result-card">
+                        <h3>Medicare (1.45%)</h3>
+                        <p class="result-value" id="medicare">$0.00</p>
+                    </div>
+                    <div class="result-card result-card-highlight">
+                        <h3>Net Annual Pay</h3>
+                        <p class="result-value" id="netAnnual">$0.00</p>
+                    </div>
+                </div>
+
+                <div class="pay-frequency-section">
+                    <h3>Take-Home Pay by Frequency</h3>
+                    <div class="results-grid">
+                        <div class="result-card">
+                            <h3>Monthly</h3>
+                            <p class="result-value" id="netMonthly">$0.00</p>
+                        </div>
+                        <div class="result-card">
+                            <h3>Bi-Weekly</h3>
+                            <p class="result-value" id="netBiweekly">$0.00</p>
+                        </div>
+                        <div class="result-card">
+                            <h3>Weekly</h3>
+                            <p class="result-value" id="netWeekly">$0.00</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <h3>Pay Breakdown</h3>
+                    <canvas id="paycheckChart"></canvas>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Understanding Your Paycheck</h2>
+
+                <p>Your take-home pay is the amount you actually receive after all taxes and deductions are withheld from your gross pay. Understanding these deductions helps you plan your budget and make informed financial decisions.</p>
+
+                <h3>Federal Income Tax</h3>
+                <p>The U.S. uses a progressive tax system with tax brackets. This means different portions of your income are taxed at different rates. For 2024, single filers have brackets ranging from 10% to 37%. You only pay the higher rate on income within that bracket, not on your entire income.</p>
+
+                <h3>FICA Taxes (Social Security & Medicare)</h3>
+                <ul>
+                    <li><strong>Social Security:</strong> 6.2% of your gross pay, up to the wage base limit ($168,600 in 2024). Your employer also pays 6.2%.</li>
+                    <li><strong>Medicare:</strong> 1.45% of your gross pay with no income limit. An additional 0.9% applies to earnings over $200,000 (single filers).</li>
+                </ul>
+
+                <h3>State Income Tax</h3>
+                <p>State income tax rates vary widely. Nine states have no income tax: Alaska, Florida, Nevada, New Hampshire, South Dakota, Tennessee, Texas, Washington, and Wyoming. Other states range from about 1% to over 13% (California).</p>
+
+                <h3>Ways to Increase Your Take-Home Pay</h3>
+                <ul>
+                    <li>Contribute to a pre-tax 401(k) to reduce taxable income</li>
+                    <li>Use a Health Savings Account (HSA) or Flexible Spending Account (FSA)</li>
+                    <li>Claim all eligible tax deductions and credits</li>
+                    <li>Adjust your W-4 withholding if you consistently get large tax refunds</li>
+                    <li>Consider tax-advantaged benefits offered by your employer</li>
+                </ul>
+            </section>
+
+            <section class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+
+                <div class="faq-item">
+                    <h3>Why is my paycheck less than my salary divided by pay periods?</h3>
+                    <p>Your employer withholds federal income tax, state income tax, Social Security (6.2%), and Medicare (1.45%) from each paycheck. Additional deductions may include health insurance, retirement contributions, and other benefits.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>What is the difference between gross pay and net pay?</h3>
+                    <p>Gross pay is your total earnings before any deductions. Net pay (take-home pay) is what you actually receive after all taxes and deductions are subtracted. Your net pay is typically 25-35% less than your gross pay.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>How do federal tax brackets work?</h3>
+                    <p>Tax brackets are progressive, meaning only the income within each bracket is taxed at that rate. For example, if you earn $50,000 as a single filer, the first $11,600 is taxed at 10%, the next portion at 12%, and so on. Your effective tax rate is lower than your marginal bracket.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Should I adjust my W-4 withholding?</h3>
+                    <p>If you consistently receive a large tax refund, you may be over-withholding. Adjusting your W-4 can increase your take-home pay throughout the year instead of giving the government an interest-free loan. Conversely, if you owe taxes each year, you may need to increase withholding.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Are there states with no income tax?</h3>
+                    <p>Yes. Alaska, Florida, Nevada, New Hampshire, South Dakota, Tennessee, Texas, Washington, and Wyoming have no state income tax. However, these states may have higher sales or property taxes to compensate.</p>
+                </div>
+            </section>
+
+            <div class="ad-zone ad-bottom">
+                <p class="ad-placeholder">Advertisement</p>
+            </div>
+        </div>
+    </main>
+
+    <section class="email-signup">
+        <div class="email-signup-content">
+            <h2>Get Free Financial Tips</h2>
+            <p>Join our newsletter for weekly money-saving tips, budgeting strategies, and smart financial advice delivered straight to your inbox.</p>
+            <form class="email-signup-form" action="https://formspree.io/f/mwvnkypd" method="POST">
+                <input type="email" name="email" placeholder="Enter your email address" required>
+                <button type="submit">Subscribe</button>
+            </form>
+            <div class="email-signup-thankyou">Thank you for subscribing! Check your inbox for a confirmation.</div>
+            <p class="email-signup-privacy">We respect your privacy. Unsubscribe at any time.</p>
+        </div>
+    </section>
+
+    <script>
+    document.querySelector('.email-signup-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var form = this;
+        fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+        }).then(function(response) {
+            if (response.ok) {
+                form.style.display = 'none';
+                form.parentElement.querySelector('.email-signup-thankyou').style.display = 'block';
+            }
+        });
+    });
+    </script>
+
+    <footer>
+        <div class="container">
+            <p><strong>Disclaimer:</strong> This calculator is provided for educational and informational purposes only. It does not constitute financial or tax advice. Actual tax withholdings may differ based on deductions, credits, and individual circumstances. Consult a tax professional for specific advice.</p>
+            <p>&copy; 2026 Calculator Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="paycheck-calculator.js"></script>
+</body>
+</html>
